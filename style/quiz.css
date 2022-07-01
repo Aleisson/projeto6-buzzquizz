@@ -29,10 +29,12 @@
     background: #FFFFFF;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
     padding: 8px 4px;
+  
+    /* transition: height 4s; */
 }
 
 .content-quiz input {
-    width: 90%;
+    width: 95%;
     height: 46px;
     margin: 4px auto;
     border-radius: 4px;
@@ -47,7 +49,7 @@
 }
 
 .button-quiz {
-    margin: 80px auto 0 auto;
+    margin: 80px auto 80px auto;
     width: 370px;
     height: 54px;
     border-radius: 24px;
@@ -57,6 +59,51 @@
     align-items: center;
     color: #FFFFFF;
     font-size: 18px;
+}
+
+.pergunta {
+    width: 600px;
+    height: auto;/*80px*/
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    padding: 18px 0 18px 18px;
+    margin: 4px auto;
+    overflow-y: hidden;
+    
+}
+
+.pergunta div > div{
+    width: 600px;
+    margin: 20px 0;
+    background-color: #EC362D;
+}
+
+.pergunta  div > div h3{
+    position: relative;
+    top:20px;
+    right:0;
+}
+
+.pergunta  div > div ion-icon{
+    position: relative;
+    font-size: 26px;
+    top:0;
+    left:0;
+}
+
+
+.pergunta p{
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    
+}
+
+.pergunta h3{
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    margin: 18px 0;
 }
 
 
@@ -75,9 +122,12 @@
     }
 }
 
+/* overflow-y:hidden
+transition: height 4s; */
+
 @media (max-width: 370px) {
 
-    .button-quiz{
+    .button-quiz {
         width: 90%;
     }
 
