@@ -29,7 +29,7 @@
     background: #FFFFFF;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
     padding: 8px 4px;
-  
+
     /* transition: height 4s; */
 }
 
@@ -39,6 +39,8 @@
     margin: 4px auto;
     border-radius: 4px;
     border: 1px solid #D1D1D1;
+    font-size: 18px;
+    font-weight: 400;
 }
 
 .content-quiz input::placeholder {
@@ -63,43 +65,44 @@
 
 .pergunta {
     width: 600px;
-    height: auto;/*80px*/
+    height: 64px;
+    /*80px*/
     background: #FFFFFF;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
     padding: 18px 0 18px 18px;
     margin: 4px auto;
     overflow-y: hidden;
-    
+    transition:  height 4s;
 }
 
-.pergunta div > div{
-    width: 600px;
+
+
+.pergunta div> div {
+    width: 96%;
     margin: 20px 0;
-    background-color: #EC362D;
+    display: flex;
+    justify-content: space-between;
 }
 
-.pergunta  div > div h3{
-    position: relative;
-    top:20px;
-    right:0;
-}
+.pergunta div {
+    margin: 20px 0;
+} 
 
 .pergunta  div > div ion-icon{
     position: relative;
     font-size: 26px;
-    top:0;
-    left:0;
-}
-
-
-.pergunta p{
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 23px;
     
 }
 
-.pergunta h3{
+
+.pergunta p {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+
+}
+
+.pergunta h3 {
     font-weight: 700;
     font-size: 20px;
     line-height: 23px;
