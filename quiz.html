@@ -19,28 +19,23 @@
         <h2>Comece pelo começo</h2>
     </div>
     <div class="content-quiz">
-    <form action="#" onsubmit=" return form(this);">
-        <div class="pergunta">
-            <div>
-                <div onclick="expande(this)">
-                    <p>Nivel 1</p>
-                    <ion-icon name="create-outline"></ion-icon>
-                </div>
-                <input placeholder="Título do nível" minlength="10" type="text" required>
-                <input placeholder="% de acerto mínima" min="0" max="100" type="number" required>
-                <input placeholder="URL da imagem do nível"  type="url" required>
-                <textarea  placeholder="Descrição do nível" minlength="30" required></textarea>
+        <form action="/quiz_tela2.html" onsubmit="chamarPeguntas(this);">
+                    <input name="titulo" placeholder="Título do seu quizz" minlength="20" maxlength="65" type="text" required>
+                    <input name="url_image" placeholder="URL da imagem do seu quizz" type="url" required>
+                    <input name="qtd_perguntas" placeholder="Quantidade de perguntas do quizz" type="number" min="3" required>
+                    <input name="qtd_niveis" placeholder="Quantidade de níveis do quizz" type="number" min="2" required>
             </div>
-        </div>
-        <input class="button-quiz" type="submit" value="Prosseguir pra cria níveis">
-    </form>    
-        
-</div>
-   
 
-      
-</div>
-  
+            <input class="button-quiz" type="submit" value="Prosseguir pra criar perguntas">
+
+        </form>
+
+    </div>
+
+
+
+    </div>
+
     </form>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
