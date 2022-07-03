@@ -27,7 +27,6 @@
     flex-direction: column;
     align-items: center;
     background: #FFFFFF;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
     padding: 8px 4px;
 
     /* transition: height 4s; */
@@ -75,6 +74,8 @@
     font-size: 18px;
 }
 
+
+
 .pergunta {
     width: 600px;
     height: 80px;
@@ -85,6 +86,16 @@
     margin: 4px auto;
     overflow-y: hidden;
     transition: height 2s;
+}
+
+.pergunta-primeira{
+    width: 600px;
+    height: auto;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    padding: 18px 0 18px 18px;
+    margin: 14px auto;
+   
 }
 
 .quiz-img {
@@ -164,10 +175,14 @@
         width: 100%;
         margin: 100px auto 0 auto;
     }
+    .pergunta-primeira{
+        width: 100%;
+    }
 
     .pergunta {
         width: 100%;
     }
+    
 
     .pergunta div {
         width: 100%;
