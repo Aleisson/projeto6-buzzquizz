@@ -18,3 +18,11 @@ function expande(element){
        element.querySelector("ion-icon").style.color = "#000000";
     }
 }
+
+
+
+
+// function form(content){
+//    console.log(content.teste.value);
+//    return false;
+// }
