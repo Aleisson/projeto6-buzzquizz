@@ -1,17 +1,18 @@
 let quizz;
 let idQuizz;
 let perguntas;
-
+let questions;
+let arrayPerguntas = []
 let caixaQuestion;
+
 let allQuizz = document.querySelector('.quizz-publico')
 let perguntasHidden = document.querySelector('.perguntas')
 let caixaUsuario = document.querySelector('.caixa-usuario')
 let todosQuizz = document.querySelector('.todos-quizz')
 let quizzPublico = document.querySelector('.quizz-publico')
    
-let questions;
-let answers;
-let arrayPerguntas = []
+
+
 
 
 function buscarQuizz() {
@@ -47,7 +48,7 @@ function criarQuizz() {
 }
 
 function perguntaQuizz(elemento) {
-    idQuizz = elemento.querySelector('span').innerHTML
+    idQuizz = elemento.querySelector('li span').innerHTML
     caixaUsuario.innerHTML = '' 
     todosQuizz.innerHTML = ''
     quizzPublico.innerHTML = ''
@@ -64,96 +65,164 @@ function buscarPerguntas() {
 function renderizarPerguntas(resposta) {
     perguntasHidden.classList.remove('escondido')
     perguntas = resposta.data
-    questions = perguntas.questions
+    questions = perguntas.questions 
+    console.log(perguntas)   
       
-    perguntasHidden.innerHTML += `
-            <div class="topo-perguntas">
-                <img src="${perguntas.image}" alt="">
-                <h2>${perguntas.title}</h2>
-            </div>
-        `
+        perguntasHidden.innerHTML += `
+                <div class="topo-perguntas">
+                    <img src="${perguntas.image}" alt="">
+                    <h2>${perguntas.title}</h2>
+                </div>
+            `
         
-        for(let i = 0; i < perguntas.questions.length; i++ ) {
-            
-            perguntasHidden.innerHTML += `
-                <ul class="caixa-perguntas">
-            
-                    <div class="question">
-                        <div class="topo-question">
-                            <h3>${questions[i].title}</h3>
-                        </div>                      
-                        
-                        <div class="img-question">
-
-                        </div>
-                    </div>
+            for(let i = 0; i < perguntas.questions.length; i++ ) {
+                            
+                perguntasHidden.innerHTML += `
+                    <ul class="caixa-perguntas">
                 
-                </ul> 
-                `
-            
+                        <div class="question">
+                            <div class="topo-question">
+                                <h3>${questions[i].title}</h3>
+                            </div>                      
+                            
+                            <div class="img-question">
+
+                            </div>
+                        </div>
+                    
+                    </ul> 
+                    `
+                let cor = document.querySelectorAll('.topo-question')[i]
+                cor.style.background = `${questions[i].color}`
+
             for(let c = 0; c < questions[i].answers.length; c++) {
 
                     caixaQuestion = document.querySelectorAll('.img-question')[i]
                     
-                    caixaQuestion.innerHTML += `
+                    let perguntaTamplate = `
                         
-                            <div class="img">
+                            <div class="img" onclick="clickResposta(this)">
                                 <img src="${questions[i].answers[c].image}" alt="">
                                 <p>${questions[i].answers[c].text}</p>
-                            </div>    
-                    
+                                <span>${questions[i].answers[c].isCorrectAnswer}</span>
+                            </div>   
+                            
+                            
+                        ` 
+
+                        arrayPerguntas.sort(comparador)  
+                        function comparador() { 
+                            return Math.random() - 0.5; 
+                        }  
+                        arrayPerguntas.push(perguntaTamplate)
+                        caixaQuestion.innerHTML = arrayPerguntas.join('')
                         
-                    `
-            }
-        
-                
+            }   
+            arrayPerguntas = []           
         }
 
 }
 
 
+let acerto = 0
+let click = 0
 
-/* <div class="res-question">
+function clickResposta (elemento) {
+    let allQuestion;
+    let trueFalse;
+    
+    allQuestion = elemento.parentNode
+    trueFalse = elemento.querySelector('span').innerHTML
+    click++
+
+    console.log(trueFalse)
+    if(trueFalse === 'true') {
+        acerto++        
+    }
+    console.log(acerto)
+
+    
+    console.log(click)
+        
+    for(let i = 0; i < perguntas.questions.length; i++ ) {
+        for(let c = 0; c < questions[i].answers.length; c++){
+            allQuestion.querySelectorAll('.img')[c].removeAttribute('onclick')
+            allQuestion.querySelectorAll('.img')[c].classList.add('opacity')            
+            
+            if (allQuestion.querySelectorAll('.img span')[c].innerHTML === 'true') {
+                allQuestion.querySelectorAll('.img p')[c].classList.add('verde')
+            } 
+
+            else {
+                allQuestion.querySelectorAll('.img p')[c].classList.add('vermelho')
+            }
+        }
+    }
+    
+    elemento.classList.remove('opacity')
+    
+    if(click === perguntas.questions.length) {
+        resultado()
+    }
+}
+
+function resultado() {
+    let porcentagem = perguntas.questions.length - acerto
+    porcentagem *= 100
+    porcentagem /= perguntas.questions.length
+    porcentagem = 100 - porcentagem
+    porcentagem = Math.round(porcentagem)
+
+    console.log(porcentagem)
+
+    
+    
+    for(let i = 0; i < perguntas.levels.length; i++ ) {
+        if (porcentagem >= perguntas.levels[i].minValue) {
+            
+            perguntasHidden.innerHTML += `
+                <div class="caixa-final">
+                    <div class="res-question">
                         <div class="topo-res-question">
-                            <h3>90% de acerto: Você é praticamente um alien</h3>
+                            <h3>${porcentagem}% de acerto: ${perguntas.levels[i].title}</h3>
                         </div>
 
-                    
+                        
                         <div class="img-res-question">
                             <div class="img">
-                                <img src="imgteste/Grey_Aliens.webp" alt="">                            
+                                <img src="${perguntas.levels[i].image}" alt="">                            
                             </div>
 
                             <div class="txt-final">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident voluptate quae, aliquid voluptatibus eum quas modi repellendus omnis, recusandae perspiciatis iusto! Cum, architecto sunt! Magni incidunt deserunt porro tempora architecto?
-                                </p>
+                                <p>${perguntas.levels[i].text}</p>
                             </div>
                         </div>                    
                     </div>
-            
+                    
                     <div class="reiniciar-voltar">
-                        <div class="reiniciar">
+                        <div class="reiniciar" onclick='reiniciarQuizz()'>
                             <p>Reiniciar Quizz</p>
                         </div>
 
-                        <div class="voltar">
+                        <div class="voltar" onclick='voltarHome()'>
                             <p>Voltar para home</p>
                         </div>
                     </div>
-                 */
+                </div>
+                `
+           break; 
+        }
+        
+    }   
 
+    
+}
 
-                    /* <div class="img">
-                            <img src="${questions[i].answers[1].image}" alt="">
-                            <p>${questions[i].answers[1].text}</p>
-                        </div>
+function reiniciarQuizz() {
+    alert('reiniciando')
+}
 
-                        <div class="img">
-                            <img src="${questions[i].answers[2].image}" alt="">
-                            <p>${questions[i].answers[2].text}</p>
-                        </div>
-
-                        <div class="img">
-                            <img src="${questions[i].answers[3].image}" alt="">
-                            <p>${questions[i].answers[3].text}</p>
-                        </div> */
+function voltarHome() {
+    window.location.reload()
+}
+   
