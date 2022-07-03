@@ -18,13 +18,32 @@
     <div class="titulo">
         <h2>Comece pelo começo</h2>
     </div>
-    <form action="#" onsubmit=" return form(this);">
     <div class="content-quiz">
-        <div class="pergunta-primeira">
-        <input placeholder="Título do seu quizz" minlength="20" maxlength="65" type="text" required> 
-        <input placeholder="URL da imagem do seu quizz" type="url" required>
-        <input placeholder="Quantidade de perguntas do quizz" type="number" min="3" required>
-        <input placeholder="Quantidade de níveis do quizz" type="number" min="2" required>
+    <form action="#" onsubmit=" return form(this);">
+        <div class="pergunta">
+            <div>
+                <div onclick="expande(this)">
+                    <p>Pergunta</p>
+                    <ion-icon name="create-outline"></ion-icon>
+                </div>
+                <input placeholder="Texto da pergunta: no mínimo 20 caracteres" minlength="20" type="text" required>
+                <input placeholder="Cor de Fundos da Pergunta:" min="7" max="7" pattern="#{1}[a-fA-F\d]+" required>
+            </div>
+            <div>
+                <p>Reposta correta</p>
+                <input placeholder="Resposta correta" type="text" required>
+                <input placeholder="URL da imagem" type="url" required>
+            </div>
+            <div>
+                <p>Reposta incorretas</p>
+                <input placeholder="Resposta incorreta 1" type="text" required>
+                <input placeholder="URL da imagem" type="url" required>
+                <input placeholder="Resposta incorreta 2" type="url">
+                <input placeholder="URL da imagem" type="text">
+                <input placeholder="Resposta incorreta 3" type="text">
+                <input placeholder="URL da imagem" type="url">
+            </div>
+        </div>
     </div>
     </div>
 
@@ -61,54 +80,41 @@
 
 <!-- Tela 02  -->
 
-<!-- <div class="pergunta">
-    <div>
-        <div onclick="expande(this)">
-            <p>Pergunta</p>
-            <ion-icon name="create-outline"></ion-icon>
+<!--  <form action="#" onsubmit=" return form(this);">
+        <div class="pergunta">
+            <div>
+                <div onclick="expande(this)">
+                    <p>Pergunta</p>
+                    <ion-icon name="create-outline"></ion-icon>
+                </div>
+                <input placeholder="Texto da pergunta: no mínimo 20 caracteres" minlength="20" type="text" required>
+                <input placeholder="Cor de Fundos da Pergunta:" min="7" max="7" pattern="#{1}[a-fA-F\d]+" required>
+            </div>
+            <div>
+                <p>Reposta correta</p>
+                <input placeholder="Resposta correta" type="text" required>
+                <input placeholder="URL da imagem" type="url" required>
+            </div>
+            <div>
+                <p>Reposta incorretas</p>
+                <input placeholder="Resposta incorreta 1" type="text" required>
+                <input placeholder="URL da imagem" type="url" required>
+                <input placeholder="Resposta incorreta 2" type="url">
+                <input placeholder="URL da imagem" type="text">
+                <input placeholder="Resposta incorreta 3" type="text">
+                <input placeholder="URL da imagem" type="url">
+            </div>
         </div>
-        <input placeholder="Texto da pergunta" type="text">
-        <input placeholder="Cor de Fundos da Pergunta" type="text">
     </div>
-    <div>
-        <p>Reposta correta</p>
-        <input placeholder="Resposta correta" type="text">
-        <input placeholder="URL da imagem" type="text">
     </div>
-    <div>
-        <p>Reposta incorretas</p>
-        <input placeholder="Resposta incorreta 1" type="text">
-        <input placeholder="URL da imagem" type="text">
-        <input placeholder="Resposta incorreta 2" type="text">
-        <input placeholder="URL da imagem" type="text">
-        <input placeholder="Resposta incorreta 3" type="text">
-        <input placeholder="URL da imagem" type="text">
+
+    <input class="button-quiz" type="submit" value="Prosseguir pra cria níveis">    
+
+    <div class="button-volta">
+        <span>Voltar pra home</span>
     </div>
-</div>
-<div class="pergunta">
-    <div>
-        <div onclick="expande(this)">
-            <p>Pergunta</p>
-            <ion-icon name="create-outline"></ion-icon>
-        </div>
-        <input placeholder="Texto da pergunta" type="text">
-        <input placeholder="Cor de Fundos da Pergunta" type="text">
-    </div>
-    <div>
-        <p>Reposta correta</p>
-        <input placeholder="Resposta correta" type="text">
-        <input placeholder="URL da imagem" type="text">
-    </div>
-    <div>
-        <p>Reposta incorretas</p>
-        <input placeholder="Resposta incorreta 1" type="text">
-        <input placeholder="URL da imagem" type="text">
-        <input placeholder="Resposta incorreta 2" type="text">
-        <input placeholder="URL da imagem" type="text">
-        <input placeholder="Resposta incorreta 3" type="text">
-        <input placeholder="URL da imagem" type="text">
-    </div>
-</div> -->
+    </form>
+-->
 <!-- tela 03 -->
 <!-- <div class="pergunta">
     <div>

@@ -26,3 +26,9 @@ function form(content){
   alert("Deu certo");
    return false;
 }
+
+
+function teste(){
+    alert("Deu certo teste");
+     return false;
+  }
