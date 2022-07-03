@@ -2,6 +2,12 @@ let titulo = 0;
 let url_image = 0;
 let qtd_perguntas = 0;
 let qtd_niveis = 0;
+const url = "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes";
+let objeto_post = {
+    title: "",
+    image:"",
+    questions:[]
+}
 
 
 
@@ -34,8 +40,9 @@ function chamarPeguntas(content) {
     url_image = content.url_image.value;
     qtd_perguntas = content.qtd_perguntas.value;
     qtd_niveis = content.qtd_niveis.value;
-    localStorage.setItem("qtd_niveis",qtd_niveis);
     localStorage.setItem("qtd_pergunta", qtd_perguntas);
+    localStorage.setItem("qtd_niveis",qtd_niveis);
+   
 
     // console.log("titulo: " + titulo);
     // console.log("url: " + url_image);
@@ -52,7 +59,7 @@ function criarPeguntas() {
     qtd_perguntas = parseInt(qtd_perguntas);
     
 
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < qtd_perguntas; i++) {
         
         content_quiz.innerHTML += `
                         <div class="pergunta">
@@ -91,7 +98,74 @@ function guardaPerguntas(content){
 }
 
 function criarNiveis(){
-    alert("Deu certo");
+    const  content_quiz = document.querySelector(".content-quiz");
+    qtd_niveis = localStorage.getItem("qtd_niveis")
+    qtd_niveis = parseInt(qtd_niveis);
+    
+    for (let i = 0; i < 1; i++) {
+        
+        
+        if (i === qtd_niveis - 1) {
+            // trabalhei primeiro a excessão
+            content_quiz.innerHTML +=`<div class="pergunta">
+            <div>
+                <div onclick="expande(this)">
+                    <p>Nivel ${i + 1}</p>
+                    <ion-icon name="create-outline"></ion-icon>
+                </div>
+                <input name="titulo_nivel_${i}" placeholder="Título do nível" minlength="10" type="text" required>
+                <input name="porcetagem${i}" placeholder="% de acerto mínima" min="0" max="0" type="number" required>
+                <input name="url_porcetagem${i}" placeholder="URL da imagem do nível"  type="url" required>
+                <textarea name="textarea${i}" placeholder="Descrição do nível" minlength="30" required></textarea>
+            </div>
+        </div>`
+        }else{
+            content_quiz.innerHTML +=`<div class="pergunta">
+                                            <div>
+                                            <div onclick="expande(this)">
+                                            <p>Nivel ${i + 1}</p>
+                                            <ion-icon name="create-outline"></ion-icon>
+                                            </div>
+                                            <input name="titulo_nivel_${i}" placeholder="Título do nível" minlength="10" type="text" required>
+                                            <input name="porcetagem${i}" placeholder="% de acerto mínima" min="0" max="100" type="number" required>
+                                            <input name="url_porcetagem${i}" placeholder="URL da imagem do nível"  type="url" required>
+                                            <textarea name="textarea${i}" placeholder="Descrição do nível" minlength="30" required></textarea>
+                                            </div>
+                                        </div>`
+        }
+  
+        
+    }
+
+    content_quiz.innerHTML += ` <input class="button-quiz" type="submit" value="Prosseguir pra cria níveis">`
+}
+
+function guardarNiveis(content){
+
+    alert("deu certo " + content.titulo_nivel_1.value);
+    return false;
+
+}
+
+function criarPagePronto(){
+    const  content_quiz = document.querySelector(".content-quiz");
+
+    content_quiz.innerHTML += `<div class="quiz-img">
+                                 <img src="imgteste/one-punch-man.webp" alt="">
+                                    <p>Acerte os personagens corretos do one punch man e prove seu amor!</p>
+                                </div> 
+                                <input class="button-quiz" type="submit" value="Acessar  Quizz">    
+
+                                <div onclick="home()" class="button-volta">
+                                    <span>Voltar pra home</span>
+                                </div>
+                                </div>`;
+ 
+    return false;
+}
+
+function home(){
+    location.assign("/index.html");
 }
 
 function form(content) {
@@ -99,3 +173,4 @@ function form(content) {
     return false;
 }
 
+//post.then(x => x.data)
