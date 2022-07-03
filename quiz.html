@@ -23,35 +23,24 @@
         <div class="pergunta">
             <div>
                 <div onclick="expande(this)">
-                    <p>Pergunta</p>
+                    <p>Nivel 1</p>
                     <ion-icon name="create-outline"></ion-icon>
                 </div>
-                <input placeholder="Texto da pergunta: no mínimo 20 caracteres" minlength="20" type="text" required>
-                <input placeholder="Cor de Fundos da Pergunta:" min="7" max="7" pattern="#{1}[a-fA-F\d]+" required>
-            </div>
-            <div>
-                <p>Reposta correta</p>
-                <input placeholder="Resposta correta" type="text" required>
-                <input placeholder="URL da imagem" type="url" required>
-            </div>
-            <div>
-                <p>Reposta incorretas</p>
-                <input placeholder="Resposta incorreta 1" type="text" required>
-                <input placeholder="URL da imagem" type="url" required>
-                <input placeholder="Resposta incorreta 2" type="url">
-                <input placeholder="URL da imagem" type="text">
-                <input placeholder="Resposta incorreta 3" type="text">
-                <input placeholder="URL da imagem" type="url">
+                <input placeholder="Título do nível" minlength="10" type="text" required>
+                <input placeholder="% de acerto mínima" min="0" max="100" type="number" required>
+                <input placeholder="URL da imagem do nível"  type="url" required>
+                <textarea  placeholder="Descrição do nível" minlength="30" required></textarea>
             </div>
         </div>
-    </div>
-    </div>
+        <input class="button-quiz" type="submit" value="Prosseguir pra cria níveis">
+    </form>    
+        
+</div>
+   
 
-    <input class="button-quiz" type="submit" value="Prosseguir pra cria níveis">    
-
-    <div class="button-volta">
-        <span>Voltar pra home</span>
-    </div>
+      
+</div>
+  
     </form>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
@@ -66,7 +55,7 @@
 </div>
   <form action="#" onsubmit=" return form(this);">
     <div class="content-quiz">
-        <div class="pergunta-primeira">
+        <div class="pergunta">
         <input placeholder="Título do seu quizz" minlength="20" maxlength="65" type="text" required> 
         <input placeholder="URL da imagem do seu quizz" type="url" required>
         <input placeholder="Quantidade de perguntas do quizz" type="number" min="3" required>
@@ -106,45 +95,41 @@
             </div>
         </div>
     </div>
-    </div>
+   
 
     <input class="button-quiz" type="submit" value="Prosseguir pra cria níveis">    
-
-    <div class="button-volta">
-        <span>Voltar pra home</span>
-    </div>
+</div>
+  
     </form>
+  
 -->
 <!-- tela 03 -->
-<!-- <div class="pergunta">
-    <div>
-        <div onclick="expande(this)">
-            <p>Nivel 1</p>
-            <ion-icon name="create-outline"></ion-icon>
+<!--   <form action="#" onsubmit=" return form(this);">
+        <div class="pergunta">
+            <div>
+                <div onclick="expande(this)">
+                    <p>Nivel 1</p>
+                    <ion-icon name="create-outline"></ion-icon>
+                </div>
+                <input placeholder="Título do nível" minlength="10" type="text" required>
+                <input placeholder="% de acerto mínima" min="0" max="100" type="number" required>
+                <input placeholder="URL da imagem do nível"  type="url" required>
+                <textarea  placeholder="Descrição do nível" minlength="30" required></textarea>
+            </div>
         </div>
-        <input placeholder="Título do nível" type="text">
-        <input placeholder="% de acerto mínima" type="text">
-        <input placeholder="URL da imagem do nível" type="text">
-        <input placeholder="Discrição do nível" type="text">
-    </div>
-</div>
-<div class="pergunta">
-    <div>
-        <div onclick="expande(this)">
-            <p>Nivel 1</p>
-            <ion-icon name="create-outline"></ion-icon>
-        </div>
-        <input placeholder="Título do nível" type="text">
-        <input placeholder="% de acerto mínima" type="text">
-        <input placeholder="URL da imagem do nível" type="text">
-        <input placeholder="Discrição do nível" type="text">
-    </div>
-</div> -->
+        <input class="button-quiz" type="submit" value="Prosseguir pra cria níveis">
+ -->
 <!-- tela 04
 <div class="quiz-img">
     <img src="imgteste/one-punch-man.webp" alt="">
     <p>Acerte os personagens corretos do one punch man e prove seu amor!</p>
-</div> -->
+</div> 
+<input class="button-quiz" type="submit" value="Prosseguir pra cria níveis">    
+
+<div class="button-volta">
+    <span>Voltar pra home</span>
+</div>
+-->
 <!-- Form -->
 <!-- <form action="#" onsubmit=" return form(this);">
            

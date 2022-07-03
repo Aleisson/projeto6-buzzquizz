@@ -32,22 +32,6 @@
     /* transition: height 4s; */
 }
 
-.content-quiz form input {
-    width: 95%;
-    height: 46px;
-    margin: 4px auto;
-    border-radius: 4px;
-    border: 1px solid #D1D1D1;
-    font-size: 18px;
-    font-weight: 400;
-}
-
-.content-quiz input::placeholder {
-    font-size: 18px;
-    font-style: italic;
-    font-weight: 400;
-    padding-left: 16px;
-}
 
 .button-quiz {
     margin: 80px auto 80px auto;
@@ -88,15 +72,43 @@
     transition: height 2s;
 }
 
-.pergunta-primeira{
-    width: 600px;
-    height: auto;
-    background: #FFFFFF;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
-    padding: 18px 0 18px 18px;
-    margin: 14px auto;
+.pergunta input {
+    width: 95%;
+    height: 46px;
+    margin: 4px auto;
+    border-radius: 4px;
+    border: 1px solid #D1D1D1;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.pergunta textarea {
+    width: 95%;
+    height: 168px;
+    margin: 4px auto;
+    border-radius: 4px;
+    border: 1px solid #D1D1D1;
+    font-size: 18px;
+    font-weight: 400;
+    padding-top: 12px;
+}
+
+.pergunta  input::placeholder {
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 400;
+    padding-left: 16px;
+}
+
+
+.pergunta  textarea::placeholder {
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 400;
+    padding-left: 16px;
    
 }
+
 
 .quiz-img {
     margin-top: 42px;

@@ -7,7 +7,7 @@ function expande(element){
         pergunta.classList.add("expandir");
         element.querySelector("ion-icon").style.color = "#FFFFFF";
         if(filhos === 1){
-            pergunta.style.height = "340px"
+            pergunta.style.height = "480px"
         }else{
             pergunta.style.height = "740px";
         }
