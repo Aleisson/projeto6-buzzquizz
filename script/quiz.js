@@ -22,7 +22,7 @@ function expande(element){
 
 
 
-// function form(content){
-//    console.log(content.teste.value);
-//    return false;
-// }
+function form(content){
+  alert("Deu certo");
+   return false;
+}
