@@ -10,11 +10,11 @@ let perguntasHidden = document.querySelector('.perguntas')
 let caixaUsuario = document.querySelector('.caixa-usuario')
 let todosQuizz = document.querySelector('.todos-quizz')
 let quizzPublico = document.querySelector('.quizz-publico')
+
+function minhasQuizz() {
+    
+}
    
-
-
-
-
 function buscarQuizz() {
     const promise = axios.get('https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes')
 
@@ -40,8 +40,7 @@ function rendereizarQuizz(resposta) {
 }
 
 function criarQuizz() {
-    /* aqui vai a função que cria o quizz do usuario */
-    alert('função em criação')
+    location.assign("/quiz.html")
     
 }
 
@@ -178,7 +177,7 @@ function resultado() {
 
     perguntasHidden.innerHTML += `
         <div class="caixa-final">
-        
+
         </div>
         `
     
