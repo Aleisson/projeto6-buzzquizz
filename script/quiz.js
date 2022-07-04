@@ -11,8 +11,8 @@ const objeto_post = {
     levels: []
 }
 
-const obejto_pessoa ={
-    quizzs : []
+const obejto_pessoa = {
+    quizzs: []
 }
 let pessoa = obejto_pessoa;
 let objeto_post_Storage = objeto_post;
@@ -58,7 +58,7 @@ function chamarPeguntas(content) {
 
     objeto_post_Storage.title = titulo;
     objeto_post_Storage.image = url_image;
-    alert(objeto_post_Storage.title);
+    
 
     objeto_post_Storage = JSON.stringify(objeto_post_Storage);
 
@@ -108,8 +108,8 @@ function criarPeguntas() {
                                         <p>Reposta incorretas</p>
                                         <input name="resposta${i}_1" placeholder="Resposta incorreta 1" type="text" required>
                                         <input name="url_reposta${i}_1" placeholder="URL da imagem" type="url" required>
-                                        <input name="resposta${i}_2" placeholder="Resposta incorreta 2" type="url">
-                                        <input name="url_reposta${i}_2" placeholder="URL da imagem" type="text">
+                                        <input name="resposta${i}_2" placeholder="Resposta incorreta 2" type="text">
+                                        <input name="url_reposta${i}_2" placeholder="URL da imagem" type="url">
                                         <input name="resposta${i}_3" placeholder="Resposta incorreta 3" type="text">
                                         <input name="url_reposta${i}_3" placeholder="URL da imagem" type="url">
                                     </div>
@@ -239,15 +239,16 @@ function guardarNiveis() {
 function criarPagePronto() {
     const content_quiz = document.querySelector(".content-quiz");
     let aux = JSON.parse(localStorage.getItem("quizz"));
-    
+
     objeto_post_Storage = JSON.parse(localStorage.getItem("post"));
-    
+
     localStorage.removeItem("qtd_pergunta");
     localStorage.removeItem("qtd_niveis");
+    
 
     content_quiz.innerHTML += `<div class="quiz-img">
                                  <img src="${objeto_post_Storage.image}" alt="">
-                                    <p>Acerte os personagens corretos do one punch man e prove seu amor!</p>
+                                    <p>${objeto_post_Storage.title}</p>
                                 </div>
                                 <input class="button-quiz" type="submit" value="Acessar  Quizz">
 
@@ -257,18 +258,18 @@ function criarPagePronto() {
                                 </div>`;
 
 
-    
+
 
     const post = axios.post(url_api, objeto_post_Storage);
-    
-   post.then(x =>{
-    localStorage.setItem("pessoa", JSON.stringify({id: x.data.id, key: x.data.key}))
+
+    post.then(x => {
+        localStorage.setItem("pessoa", JSON.stringify({ id: x.data.id, key: x.data.key }))
     });
     pessoa.quizzs.push(aux.quizzs);
     pessoa.quizzs.push(JSON.parse(localStorage.getItem("pessoa")));
     localStorage.removeItem("quizz");
     localStorage.setItem("quizz", JSON.stringify(pessoa));
-    
+
 }
 
 
