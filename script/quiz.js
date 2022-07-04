@@ -249,13 +249,8 @@ function criarPagePronto() {
     content_quiz.innerHTML += `<div class="quiz-img">
                                  <img src="${objeto_post_Storage.image}" alt="">
                                     <p>${objeto_post_Storage.title}</p>
-                                </div>
-                                <input class="button-quiz" type="submit" value="Acessar  Quizz">
-
-                                <div onclick="home()" class="button-volta">
-                                    <span>Voltar pra home</span>
-                                </div>
-                                </div>`;
+                                </div>`
+                               
 
 
 
@@ -263,7 +258,13 @@ function criarPagePronto() {
     const post = axios.post(url_api, objeto_post_Storage);
 
     post.then(x => {
-        localStorage.setItem("pessoa", JSON.stringify({ id: x.data.id, key: x.data.key }))
+        localStorage.setItem("pessoa", JSON.stringify({ id: x.data.id, key: x.data.key}));
+        content_quiz.innerHTML += `<input class="button-quiz" onclick="rederizarQuiz(${x.data.id})" type="submit" value="Acessar  Quizz">
+
+        <div onclick="home()" class="button-volta">
+            <span>Voltar pra home</span>
+        </div>
+        </div>`
     });
     pessoa.quizzs.push(aux.quizzs);
     pessoa.quizzs.push(JSON.parse(localStorage.getItem("pessoa")));
@@ -278,6 +279,11 @@ function criarPagePronto() {
 function home() {
     location.assign("/index.html");
 }
+
+function rederizarQuiz(id){
+    alert("ID: " + id)
+}
+
 
 function form(content) {
     alert("deucerto " + content.titulo.value);
