@@ -2,12 +2,20 @@ let titulo = 0;
 let url_image = 0;
 let qtd_perguntas = 0;
 let qtd_niveis = 0;
-const url = "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes";
-let objeto_post = {
+
+const url_api = "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes";
+const objeto_post = {
     title: "",
-    image:"",
-    questions:[]
+    image: "",
+    questions: [],
+    levels: []
 }
+
+const obejto_pessoa ={
+    quizzs : []
+}
+let pessoa = obejto_pessoa;
+let objeto_post_Storage = objeto_post;
 
 
 
@@ -40,9 +48,28 @@ function chamarPeguntas(content) {
     url_image = content.url_image.value;
     qtd_perguntas = content.qtd_perguntas.value;
     qtd_niveis = content.qtd_niveis.value;
+
+    localStorage.removeItem("qtd_pergunta");
+    localStorage.removeItem("qtd_niveis");
+
     localStorage.setItem("qtd_pergunta", qtd_perguntas);
-    localStorage.setItem("qtd_niveis",qtd_niveis);
-   
+    localStorage.setItem("qtd_niveis", qtd_niveis);
+
+
+    objeto_post_Storage.title = titulo;
+    objeto_post_Storage.image = url_image;
+    alert(objeto_post_Storage.title);
+
+    objeto_post_Storage = JSON.stringify(objeto_post_Storage);
+
+    localStorage.removeItem("post");
+
+    localStorage.setItem("post", objeto_post_Storage)
+
+
+
+
+
 
     // console.log("titulo: " + titulo);
     // console.log("url: " + url_image);
@@ -54,13 +81,13 @@ function chamarPeguntas(content) {
 }
 
 function criarPeguntas() {
-    const  content_quiz = document.querySelector(".content-quiz");
+    const content_quiz = document.querySelector(".content-quiz");
     qtd_perguntas = localStorage.getItem("qtd_pergunta")
     qtd_perguntas = parseInt(qtd_perguntas);
-    
+
 
     for (let i = 0; i < qtd_perguntas; i++) {
-        
+
         content_quiz.innerHTML += `
                         <div class="pergunta">
                                     <div>
@@ -74,40 +101,86 @@ function criarPeguntas() {
                                     </div>
                                     <div>
                                         <p>Reposta correta</p>
-                                        <input name="correta${i}" placeholder="Resposta correta" type="text" required>
-                                        <input name="url_correta${i}" placeholder="URL da imagem" type="url" required>
+                                        <input name="resposta${i}_0" placeholder="Resposta correta" type="text" required>
+                                        <input name="url_reposta${i}_0" placeholder="URL da imagem" type="url" required>
                                     </div>
                                     <div>
                                         <p>Reposta incorretas</p>
-                                        <input name="incorreta1_${i}" placeholder="Resposta incorreta 1" type="text" required>
-                                        <input name="url_incorreta1_${i}" placeholder="URL da imagem" type="url" required>
-                                        <input name="incorreta2_${i}" placeholder="Resposta incorreta 2" type="url">
-                                        <input name="url_incorreta2_${i}" placeholder="URL da imagem" type="text">
-                                        <input name="incorreta3_${i}" placeholder="Resposta incorreta 3" type="text">
-                                        <input name="url_incorreta3_${i}" placeholder="URL da imagem" type="url">
+                                        <input name="resposta${i}_1" placeholder="Resposta incorreta 1" type="text" required>
+                                        <input name="url_reposta${i}_1" placeholder="URL da imagem" type="url" required>
+                                        <input name="resposta${i}_2" placeholder="Resposta incorreta 2" type="url">
+                                        <input name="url_reposta${i}_2" placeholder="URL da imagem" type="text">
+                                        <input name="resposta${i}_3" placeholder="Resposta incorreta 3" type="text">
+                                        <input name="url_reposta${i}_3" placeholder="URL da imagem" type="url">
                                     </div>
                         </div>`
     }
     content_quiz.innerHTML += `<input class="button-quiz" type="submit" value="Prosseguir pra cria níveis">    `
 }
 
-function guardaPerguntas(content){
-    //adicionar função quando for acessar a API;
-    console.log(content)
+function guardaPerguntas() {
+
+
+    objeto_post_Storage = JSON.parse(localStorage.getItem("post"))
+
+
+
+    for (let i = 0; i < qtd_perguntas; i++) {
+
+        objeto_post_Storage.questions.push({
+            title: document.querySelector(`[name="pergunta${i}"]`).value,
+            color: document.querySelector(`[name="cor${i}"]`).value,
+            answers: []
+        })
+    }
+
+    for (let y = 0; y < qtd_perguntas; y++) {
+
+        for (let i = 0; i < 4; i++) {
+
+            if (i === 0) {
+                objeto_post_Storage.questions[y].answers.push({
+
+                    text: document.querySelector(`[name="resposta${y}_${i}"]`).value,
+                    image: document.querySelector(`[name="url_reposta${y}_${i}"]`).value,
+                    isCorrectAnswer: true
+
+                })
+
+            } else if (document.querySelector(`[name="resposta${y}_${i}"]`).value && document.querySelector(`[name="resposta${y}_${i}"]`).value) {
+                objeto_post_Storage.questions[y].answers.push({
+
+                    text: document.querySelector(`[name="resposta${y}_${i}"]`).value,
+                    image: document.querySelector(`[name="resposta${y}_${i}"]`).value,
+                    isCorrectAnswer: false
+
+                })
+            }
+
+        }
+    }
+
+    localStorage.removeItem("post");
+    objeto_post_Storage = JSON.stringify(objeto_post_Storage);
+    localStorage.setItem("post", objeto_post_Storage);
+
+
+
+
     return false;
 }
 
-function criarNiveis(){
-    const  content_quiz = document.querySelector(".content-quiz");
+function criarNiveis() {
+    const content_quiz = document.querySelector(".content-quiz");
     qtd_niveis = localStorage.getItem("qtd_niveis")
     qtd_niveis = parseInt(qtd_niveis);
-    
-    for (let i = 0; i < 1; i++) {
-        
-        
+
+    for (let i = 0; i < qtd_niveis; i++) {
+
+
         if (i === qtd_niveis - 1) {
             // trabalhei primeiro a excessão
-            content_quiz.innerHTML +=`<div class="pergunta">
+            content_quiz.innerHTML += `<div class="pergunta">
             <div>
                 <div onclick="expande(this)">
                     <p>Nivel ${i + 1}</p>
@@ -119,8 +192,8 @@ function criarNiveis(){
                 <textarea name="textarea${i}" placeholder="Descrição do nível" minlength="30" required></textarea>
             </div>
         </div>`
-        }else{
-            content_quiz.innerHTML +=`<div class="pergunta">
+        } else {
+            content_quiz.innerHTML += `<div class="pergunta">
                                             <div>
                                             <div onclick="expande(this)">
                                             <p>Nivel ${i + 1}</p>
@@ -133,38 +206,75 @@ function criarNiveis(){
                                             </div>
                                         </div>`
         }
-  
-        
+
+
     }
 
     content_quiz.innerHTML += ` <input class="button-quiz" type="submit" value="Prosseguir pra cria níveis">`
 }
 
-function guardarNiveis(content){
+function guardarNiveis() {
 
-    alert("deu certo " + content.titulo_nivel_1.value);
+    objeto_post_Storage = JSON.parse(localStorage.getItem("post"))
+
+    for (let i = 0; i < qtd_niveis; i++) {
+
+        objeto_post_Storage.levels.push({
+            title: document.querySelector(`[name="titulo_nivel_${i}"]`).value,
+            image: document.querySelector(`[name="url_porcetagem${i}"]`).value,
+            text: document.querySelector(`[name="textarea${i}"]`).value,
+            minValue: parseInt(document.querySelector(`[name="porcetagem${i}"]`).value)
+        })
+    }
+
+    localStorage.removeItem("post");
+    objeto_post_Storage = JSON.stringify(objeto_post_Storage);
+    localStorage.setItem("post", objeto_post_Storage);
+
+
     return false;
 
 }
 
-function criarPagePronto(){
-    const  content_quiz = document.querySelector(".content-quiz");
+function criarPagePronto() {
+    const content_quiz = document.querySelector(".content-quiz");
+    let aux = JSON.parse(localStorage.getItem("quizz"));
+    
+    objeto_post_Storage = JSON.parse(localStorage.getItem("post"));
+    
+    localStorage.removeItem("qtd_pergunta");
+    localStorage.removeItem("qtd_niveis");
 
     content_quiz.innerHTML += `<div class="quiz-img">
-                                 <img src="imgteste/one-punch-man.webp" alt="">
+                                 <img src="${objeto_post_Storage.image}" alt="">
                                     <p>Acerte os personagens corretos do one punch man e prove seu amor!</p>
-                                </div> 
-                                <input class="button-quiz" type="submit" value="Acessar  Quizz">    
+                                </div>
+                                <input class="button-quiz" type="submit" value="Acessar  Quizz">
 
                                 <div onclick="home()" class="button-volta">
                                     <span>Voltar pra home</span>
                                 </div>
                                 </div>`;
- 
-    return false;
+
+
+    
+
+    const post = axios.post(url_api, objeto_post_Storage);
+    
+   post.then(x =>{
+    localStorage.setItem("pessoa", JSON.stringify({id: x.data.id, key: x.data.key}))
+    });
+    pessoa.quizzs.push(aux.quizzs);
+    pessoa.quizzs.push(JSON.parse(localStorage.getItem("pessoa")));
+    localStorage.removeItem("quizz");
+    localStorage.setItem("quizz", JSON.stringify(pessoa));
+    
 }
 
-function home(){
+
+
+
+function home() {
     location.assign("/index.html");
 }
 
@@ -174,3 +284,74 @@ function form(content) {
 }
 
 //post.then(x => x.data)
+
+//Objeto post
+// {
+// 	title: "Título do quizz",
+// 	image: "https://http.cat/411.jpg",
+// 	questions: [
+// 		{
+// 			title: "Título da pergunta 1",
+// 			color: "#123456",
+// 			answers: [
+// 				{
+// 					text: "Texto da resposta 1",
+// 					image: "https://http.cat/411.jpg",
+// 					isCorrectAnswer: true
+// 				},
+// 				{
+// 					text: "Texto da resposta 2",
+// 					image: "https://http.cat/412.jpg",
+// 					isCorrectAnswer: false
+// 				}
+// 			]
+// 		},
+// 		{
+// 			title: "Título da pergunta 2",
+// 			color: "#123456",
+// 			answers: [
+// 				{
+// 					text: "Texto da resposta 1",
+// 					image: "https://http.cat/411.jpg",
+// 					isCorrectAnswer: true
+// 				},
+// 				{
+// 					text: "Texto da resposta 2",
+// 					image: "https://http.cat/412.jpg",
+// 					isCorrectAnswer: false
+// 				}
+// 			]
+// 		},
+// 		{
+// 			title: "Título da pergunta 3",
+// 			color: "#123456",
+// 			answers: [
+// 				{
+// 					text: "Texto da resposta 1",
+// 					image: "https://http.cat/411.jpg",
+// 					isCorrectAnswer: true
+// 				},
+// 				{
+// 					text: "Texto da resposta 2",
+// 					image: "https://http.cat/412.jpg",
+// 					isCorrectAnswer: false
+// 				}
+// 			]
+// 		}
+// 	],
+// 	levels: [
+// 		{
+// 			title: "Título do nível 1",
+// 			image: "https://http.cat/411.jpg",
+// 			text: "Descrição do nível 1",
+// 			minValue: 0
+// 		},
+// 		{
+// 			title: "Título do nível 2",
+// 			image: "https://http.cat/412.jpg",
+// 			text: "Descrição do nível 2",
+// 			minValue: 50
+// 		}
+// 	]
+// }
+
