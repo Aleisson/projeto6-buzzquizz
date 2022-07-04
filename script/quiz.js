@@ -277,7 +277,7 @@ function criarPagePronto() {
 
 
 function home() {
-    location.assign("/index.html");
+    location.assign("index.html");
 }
 
 function rederizarQuiz(id){

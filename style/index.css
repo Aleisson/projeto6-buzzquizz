@@ -15,11 +15,11 @@ header {
     height: 69px;
     position: fixed;
     top: 0;
-    left: 0;
     right: 0;
     z-index: 1;
     display: table;
     box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.267);
+    
 }
 
 header h1 {
@@ -46,8 +46,9 @@ section.quizz-nao-criada {
     width: 250px;
     height: 107px;
     display: table;
-    margin-top: 5px;
+    margin-top: 5px;    
 }
+
 .info p {
     font-size: 20px;
     font-weight: 400;
@@ -80,8 +81,7 @@ section.quizz-criada {
     width: 78%;
     height: 100%;
     margin: 0 auto;
-    margin-top: 140px;
-      
+    margin-top: 140px;   
 }
 
 ul.quizz-usuario {
@@ -141,7 +141,7 @@ li img {
     height: 181px;
     border-radius: 5px;
     position: absolute;
-    cursor: pointer;      
+    cursor: pointer;    
 }
 
 li p {
@@ -151,7 +151,6 @@ li p {
     color: #FFFFFF;
     margin-left: 18px;
     top: 138px;
-
 }
 
 li span {
@@ -237,6 +236,7 @@ li span {
     margin: 0 auto;
     margin-top: 28px;
     display: table;
+    word-wrap: break-word;
 }
 
 .topo-question h3 {
@@ -246,6 +246,7 @@ li span {
     text-align: center;
     display: table-cell;
     vertical-align: middle;  
+    
 }
 
 .img-question {
@@ -321,9 +322,7 @@ li span {
     margin: 0 auto;
     margin-top: 10px;
     margin-bottom: 8px;
-    display: flex
-    
-    
+    display: flex;   
 }
 
 .img-res-question img {
@@ -392,9 +391,95 @@ li span {
 }
 
 @media (max-width: 1100px) {
+
+    section.quizz-nao-criada {
+        width: 90%;
+        height: 181px;
+        margin: 0 auto;
+        margin-top: 140px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px dashed #B9B9B9;
+    }
+
     ul.quizz-usuario {
         display: flex;
         flex-direction: column;
         align-items: center;
+        
     }
+
+    .todos-quizz {
+        width: 90%;
+        margin: 0 auto;
+        margin-top: 77px;
+    }
+
+    ul.quizz-publico {
+        width: 90%;   
+        margin: 0 auto;
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    
+    }
+
+    .caixa-perguntas {
+        background-color: white;
+        width: 90%;
+        height: 100%;
+        margin: 0 auto;
+        margin-top: 42px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .img-question {
+        background-color: white;
+        margin: 0 auto;
+        width: 88%;
+        height: auto;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .img-res-question {
+        width: 98%;
+        height: auto;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-bottom: 8px;
+        display: flex;
+        flex-direction: column;
+        
+    }
+
+    .caixa-final {
+        background-color: white;
+        width: 90%;
+        height: 100%;
+        margin: 0 auto;
+        margin-top: 42px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .img-res-question {
+        width: 98%;
+        height: auto;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-bottom: 8px;
+        display: flex;  
+        align-items: center; 
+    }
+    
+    
+   
 }
