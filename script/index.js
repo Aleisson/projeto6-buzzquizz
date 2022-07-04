@@ -24,19 +24,17 @@ buscarQuizz()
 
 function rendereizarQuizz(resposta) {
     quizz = resposta.data
-    allQuizz.innerHTML = ''
-
-    
+    allQuizz.innerHTML = ''    
     
     for (let i = 0; i < quizz.length; i++) {
 
         allQuizz.innerHTML += `
-        <li onclick="perguntaQuizz(this)">
-            <img src="${quizz[i].image}" alt="">
-            <p>${quizz[i].title}</p>
-            <span>${quizz[i].id}</span>
-        </li>
-        `
+            <li onclick="perguntaQuizz(this)">
+                <img src="${quizz[i].image}" alt="">
+                <p>${quizz[i].title}</p>
+                <span>${quizz[i].id}</span>
+            </li>
+            `
     }
 
 }
@@ -126,7 +124,6 @@ function renderizarPerguntas(resposta) {
 
 let acerto = 0
 let click = 0
-
 function clickResposta (elemento) {
     let allQuestion;
     let trueFalse;
@@ -139,12 +136,10 @@ function clickResposta (elemento) {
     if(trueFalse === 'true') {
         acerto++        
     }
-    console.log(acerto)
-
-    
+    console.log(acerto)    
     console.log(click)
         
-    for(let i = 0; i < perguntas.questions.length; i++ ) {
+    for(let i = 0; i < perguntas.questions.length; i++ ) {        
         for(let c = 0; c < questions[i].answers.length; c++){
             allQuestion.querySelectorAll('.img')[c].removeAttribute('onclick')
             allQuestion.querySelectorAll('.img')[c].classList.add('opacity')            
@@ -164,6 +159,12 @@ function clickResposta (elemento) {
     if(click === perguntas.questions.length) {
         resultado()
     }
+
+    let scroll = document.querySelectorAll('.question')[click]
+
+        setTimeout(function() {
+            scroll.scrollIntoView()
+        }, 2000)
 }
 
 function resultado() {
@@ -175,13 +176,18 @@ function resultado() {
 
     console.log(porcentagem)
 
-    
+    perguntasHidden.innerHTML += `
+        <div class="caixa-final">
+        
+        </div>
+        `
     
     for(let i = 0; i < perguntas.levels.length; i++ ) {
         if (porcentagem >= perguntas.levels[i].minValue) {
             
-            perguntasHidden.innerHTML += `
-                <div class="caixa-final">
+            let caixaFinal = document.querySelector('.caixa-final')
+            caixaFinal.innerHTML = `
+                
                     <div class="res-question">
                         <div class="topo-res-question">
                             <h3>${porcentagem}% de acerto: ${perguntas.levels[i].title}</h3>
@@ -208,18 +214,78 @@ function resultado() {
                             <p>Voltar para home</p>
                         </div>
                     </div>
-                </div>
+                
                 `
-           break; 
-        }
-        
+            
+        }        
     }   
-
     
+    let scroll = document.querySelector('.res-question')
+        setTimeout(function() {
+            scroll.scrollIntoView()
+        }, 2000)
 }
 
 function reiniciarQuizz() {
-    alert('reiniciando')
+    perguntasHidden.innerHTML = ''
+    acerto = 0
+    click = 0
+
+    perguntasHidden.innerHTML += `
+                <div class="topo-perguntas">
+                    <img src="${perguntas.image}" alt="">
+                    <h2>${perguntas.title}</h2>
+                </div>
+            `
+        
+            for(let i = 0; i < perguntas.questions.length; i++ ) {
+                            
+                perguntasHidden.innerHTML += `
+                    <ul class="caixa-perguntas">
+                
+                        <div class="question">
+                            <div class="topo-question">
+                                <h3>${questions[i].title}</h3>
+                            </div>                      
+                            
+                            <div class="img-question">
+
+                            </div>
+                        </div>
+                    
+                    </ul> 
+                    `
+                let cor = document.querySelectorAll('.topo-question')[i]
+                cor.style.background = `${questions[i].color}`
+
+            for(let c = 0; c < questions[i].answers.length; c++) {
+
+                    caixaQuestion = document.querySelectorAll('.img-question')[i]
+                    
+                    let perguntaTamplate = `
+                        
+                            <div class="img" onclick="clickResposta(this)">
+                                <img src="${questions[i].answers[c].image}" alt="">
+                                <p>${questions[i].answers[c].text}</p>
+                                <span>${questions[i].answers[c].isCorrectAnswer}</span>
+                            </div>   
+                            
+                            
+                        ` 
+
+                        arrayPerguntas.sort(comparador)  
+                        function comparador() { 
+                            return Math.random() - 0.5; 
+                        }  
+                        arrayPerguntas.push(perguntaTamplate)
+                        caixaQuestion.innerHTML = arrayPerguntas.join('')
+                        
+            }   
+            arrayPerguntas = []           
+        }
+
+        const scroll = document.querySelector('.topo-perguntas')        
+        scroll.scrollIntoView()
 }
 
 function voltarHome() {
