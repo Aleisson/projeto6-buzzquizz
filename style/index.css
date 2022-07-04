@@ -395,7 +395,6 @@ li span {
     ul.quizz-usuario {
         display: flex;
         flex-direction: column;
-        background-color: #009C22;
         align-items: center;
     }
 }

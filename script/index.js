@@ -5,6 +5,12 @@ let questions;
 let arrayPerguntas = []
 let caixaQuestion;
 
+const objQuizz = {
+    id: "",
+    key: ""
+}
+
+
 let allQuizz = document.querySelector('.quizz-publico')
 let perguntasHidden = document.querySelector('.perguntas')
 let caixaUsuario = document.querySelector('.caixa-usuario')
@@ -12,9 +18,62 @@ let todosQuizz = document.querySelector('.todos-quizz')
 let quizzPublico = document.querySelector('.quizz-publico')
 
 function minhasQuizz() {
-    
+    let aux = [{ id: 100, key: 1 },
+    { id: 101, key: 1 },
+    { id: 102, key: 1 },
+    { id: 103, key: 1 }
+    ];
+
+
+
+    // localStorage.getItem("quizz")
+    // if (aux) {
+        // aux = JSON.parse(localStorage.getItem("quizz"));
+
+        // caixaUsuario.innerHTML += `
+        // <section class="quizz-criada">
+                
+        //     <div class="suas-quizz">
+        //         <h2>Suas quizz</h2>
+        //         <ion-icon name="add-circle" onclick="criarQuizz()"></ion-icon>
+        //     </div>
+
+        //     <ul class='quizz-usuario'>
+                           
+        //     </ul>
+        // </section>
+        // `
+
+        // let quizzUsuario = document.querySelector('.quizz-usuario')
+
+        // aux.forEach(x => {
+        //     quizzUsuario.innerHTML += `
+        //     <li onclick="perguntaQuizz(${x.id})">
+        //         <img src="imgteste/one-punch-man.webp" alt="">
+        //         <p>Acerte os personagens corretos do one punch man e prove seu amor!</p>
+        //         <span></span>
+        //     </li>`
+        // })
+
+
+//     } else {
+
+      caixaUsuario.innerHTML += `
+        <section class="quizz-nao-criada">
+            <div class="info">
+                <p>Você não criou nenhum quizz ainda :(</p>
+            </div>
+                
+            <div class="criar" onclick="criarQuizz()">
+                <p>Criar Quizz</p>
+            </div>
+        </section>
+`
+//     }
 }
-   
+
+minhasQuizz();
+
 function buscarQuizz() {
     const promise = axios.get('https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes')
 
@@ -24,8 +83,8 @@ buscarQuizz()
 
 function rendereizarQuizz(resposta) {
     quizz = resposta.data
-    allQuizz.innerHTML = ''    
-    
+    allQuizz.innerHTML = ''
+
     for (let i = 0; i < quizz.length; i++) {
 
         allQuizz.innerHTML += `
@@ -41,12 +100,12 @@ function rendereizarQuizz(resposta) {
 
 function criarQuizz() {
     location.assign("/quiz.html")
-    
+
 }
 
 function perguntaQuizz(elemento) {
     idQuizz = elemento.querySelector('li span').innerHTML
-    caixaUsuario.innerHTML = '' 
+    caixaUsuario.innerHTML = ''
     todosQuizz.innerHTML = ''
     quizzPublico.innerHTML = ''
 
@@ -62,19 +121,19 @@ function buscarPerguntas() {
 function renderizarPerguntas(resposta) {
     perguntasHidden.classList.remove('escondido')
     perguntas = resposta.data
-    questions = perguntas.questions 
-    console.log(perguntas)   
-      
-        perguntasHidden.innerHTML += `
+    questions = perguntas.questions
+    console.log(perguntas)
+
+    perguntasHidden.innerHTML += `
                 <div class="topo-perguntas">
                     <img src="${perguntas.image}" alt="">
                     <h2>${perguntas.title}</h2>
                 </div>
             `
-        
-            for(let i = 0; i < perguntas.questions.length; i++ ) {
-                            
-                perguntasHidden.innerHTML += `
+
+    for (let i = 0; i < perguntas.questions.length; i++) {
+
+        perguntasHidden.innerHTML += `
                     <ul class="caixa-perguntas">
                 
                         <div class="question">
@@ -89,14 +148,14 @@ function renderizarPerguntas(resposta) {
                     
                     </ul> 
                     `
-                let cor = document.querySelectorAll('.topo-question')[i]
-                cor.style.background = `${questions[i].color}`
+        let cor = document.querySelectorAll('.topo-question')[i]
+        cor.style.background = `${questions[i].color}`
 
-            for(let c = 0; c < questions[i].answers.length; c++) {
+        for (let c = 0; c < questions[i].answers.length; c++) {
 
-                    caixaQuestion = document.querySelectorAll('.img-question')[i]
-                    
-                    let perguntaTamplate = `
+            caixaQuestion = document.querySelectorAll('.img-question')[i]
+
+            let perguntaTamplate = `
                         
                             <div class="img" onclick="clickResposta(this)">
                                 <img src="${questions[i].answers[c].image}" alt="">
@@ -105,65 +164,65 @@ function renderizarPerguntas(resposta) {
                             </div>   
                             
                             
-                        ` 
+                        `
 
-                        arrayPerguntas.sort(comparador)  
-                        function comparador() { 
-                            return Math.random() - 0.5; 
-                        }  
-                        arrayPerguntas.push(perguntaTamplate)
-                        caixaQuestion.innerHTML = arrayPerguntas.join('')
-                        
-            }   
-            arrayPerguntas = []           
+            arrayPerguntas.sort(comparador)
+            function comparador() {
+                return Math.random() - 0.5;
+            }
+            arrayPerguntas.push(perguntaTamplate)
+            caixaQuestion.innerHTML = arrayPerguntas.join('')
+
         }
+        arrayPerguntas = []
+    }
 
 }
 
 
 let acerto = 0
 let click = 0
-function clickResposta (elemento) {
+function clickResposta(elemento) {
     let allQuestion;
     let trueFalse;
-    
+
     allQuestion = elemento.parentNode
     trueFalse = elemento.querySelector('span').innerHTML
     click++
 
     console.log(trueFalse)
-    if(trueFalse === 'true') {
-        acerto++        
+    if (trueFalse === 'true') {
+        acerto++
     }
-    console.log(acerto)    
+    console.log(acerto)
     console.log(click)
-        
-    for(let i = 0; i < perguntas.questions.length; i++ ) {        
-        for(let c = 0; c < questions[i].answers.length; c++){
+
+    for (let i = 0; i < perguntas.questions.length; i++) {
+        for (let c = 0; c < questions[i].answers.length; c++) {
             allQuestion.querySelectorAll('.img')[c].removeAttribute('onclick')
-            allQuestion.querySelectorAll('.img')[c].classList.add('opacity')            
-            
+            allQuestion.querySelectorAll('.img')[c].classList.add('opacity')
+
             if (allQuestion.querySelectorAll('.img span')[c].innerHTML === 'true') {
                 allQuestion.querySelectorAll('.img p')[c].classList.add('verde')
-            } 
+            }
 
             else {
                 allQuestion.querySelectorAll('.img p')[c].classList.add('vermelho')
             }
         }
     }
-    
+
     elemento.classList.remove('opacity')
-    
-    if(click === perguntas.questions.length) {
+
+    if (click === perguntas.questions.length) {
         resultado()
     }
 
     let scroll = document.querySelectorAll('.question')[click]
 
-        setTimeout(function() {
-            scroll.scrollIntoView()
-        }, 2000)
+    setTimeout(function () {
+        scroll.scrollIntoView()
+    }, 2000)
 }
 
 function resultado() {
@@ -180,10 +239,10 @@ function resultado() {
 
         </div>
         `
-    
-    for(let i = 0; i < perguntas.levels.length; i++ ) {
+
+    for (let i = 0; i < perguntas.levels.length; i++) {
         if (porcentagem >= perguntas.levels[i].minValue) {
-            
+
             let caixaFinal = document.querySelector('.caixa-final')
             caixaFinal.innerHTML = `
                 
@@ -215,14 +274,14 @@ function resultado() {
                     </div>
                 
                 `
-            
-        }        
-    }   
-    
+
+        }
+    }
+
     let scroll = document.querySelector('.res-question')
-        setTimeout(function() {
-            scroll.scrollIntoView()
-        }, 2000)
+    setTimeout(function () {
+        scroll.scrollIntoView()
+    }, 2000)
 }
 
 function reiniciarQuizz() {
@@ -236,10 +295,10 @@ function reiniciarQuizz() {
                     <h2>${perguntas.title}</h2>
                 </div>
             `
-        
-            for(let i = 0; i < perguntas.questions.length; i++ ) {
-                            
-                perguntasHidden.innerHTML += `
+
+    for (let i = 0; i < perguntas.questions.length; i++) {
+
+        perguntasHidden.innerHTML += `
                     <ul class="caixa-perguntas">
                 
                         <div class="question">
@@ -254,14 +313,14 @@ function reiniciarQuizz() {
                     
                     </ul> 
                     `
-                let cor = document.querySelectorAll('.topo-question')[i]
-                cor.style.background = `${questions[i].color}`
+        let cor = document.querySelectorAll('.topo-question')[i]
+        cor.style.background = `${questions[i].color}`
 
-            for(let c = 0; c < questions[i].answers.length; c++) {
+        for (let c = 0; c < questions[i].answers.length; c++) {
 
-                    caixaQuestion = document.querySelectorAll('.img-question')[i]
-                    
-                    let perguntaTamplate = `
+            caixaQuestion = document.querySelectorAll('.img-question')[i]
+
+            let perguntaTamplate = `
                         
                             <div class="img" onclick="clickResposta(this)">
                                 <img src="${questions[i].answers[c].image}" alt="">
@@ -270,24 +329,23 @@ function reiniciarQuizz() {
                             </div>   
                             
                             
-                        ` 
+                        `
 
-                        arrayPerguntas.sort(comparador)  
-                        function comparador() { 
-                            return Math.random() - 0.5; 
-                        }  
-                        arrayPerguntas.push(perguntaTamplate)
-                        caixaQuestion.innerHTML = arrayPerguntas.join('')
-                        
-            }   
-            arrayPerguntas = []           
+            arrayPerguntas.sort(comparador)
+            function comparador() {
+                return Math.random() - 0.5;
+            }
+            arrayPerguntas.push(perguntaTamplate)
+            caixaQuestion.innerHTML = arrayPerguntas.join('')
+
         }
+        arrayPerguntas = []
+    }
 
-        const scroll = document.querySelector('.topo-perguntas')        
-        scroll.scrollIntoView()
+    const scroll = document.querySelector('.topo-perguntas')
+    scroll.scrollIntoView()
 }
 
 function voltarHome() {
     window.location.reload()
 }
-   
