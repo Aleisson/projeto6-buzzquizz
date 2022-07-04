@@ -158,6 +158,12 @@ li span {
     display: none;
 }
 
+.img span {
+    display: none;
+}
+
+
+
 .perguntas {
     width: 100%; 
     background-color: white;
@@ -171,7 +177,7 @@ li span {
     width: 100%;
     height: 227px;
     position: relative;
-    background-color: black;
+    background-color: rgb(0, 0, 0);
     
 }
 
@@ -180,8 +186,8 @@ li span {
     height: 227px;
     object-fit: cover;
     position: absolute;
-    filter: opacity(60%);
-    filter: brightness(0.7);
+    filter: opacity(60%) brightness(0.4);
+    
 
 }
 
@@ -206,6 +212,16 @@ li span {
     align-items: center;
 }
 
+.caixa-final {
+    background-color: white;
+    width: 58%;
+    height: 100%;
+    margin: 0 auto;
+    margin-top: 42px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .question {
     width: 100%;
     height: 100%;
@@ -247,10 +263,16 @@ li span {
     width: 330px;
 }
 
+.opacity {
+    filter: opacity(40%)
+}
+
+
 .img-question img {
     width: 330px;
     height: 175px;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .img-question p {
@@ -260,14 +282,23 @@ li span {
     font-weight: 700;
 }
 
+.verde {
+    color: #009C22;
+}
+
+.vermelho {
+    color: #FF4B4B;
+}
+
 .res-question {
     width: 100%;
     height: 100%;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.493);
+    word-wrap: break-word;
 }
 
 .topo-res-question {
-    background-color: blueviolet;
+    background-color: #EC362D;
     width: 98%;
     height: 99px;
     margin: 0 auto;
@@ -302,10 +333,9 @@ li span {
 }
 
 .txt-final {
-width: 43.25%;
+    width: 43.25%;
     height: 100%;
-    margin-left: 25px;
-
+    margin: 0 auto;
 }
 
 .img-res-question p {
@@ -328,6 +358,7 @@ width: 43.25%;
     border-radius: 15px;
     display: table;
     margin-top: 30px;
+    cursor: pointer;
 }
 
 .reiniciar p {
@@ -343,7 +374,7 @@ width: 43.25%;
     width: 260px;
     height: 40px;
     background-color: white;
-    display: table;
+    display: table;    
 }
 
 .voltar p {
@@ -353,6 +384,8 @@ width: 43.25%;
     text-align: center;
     display: table-cell;
     vertical-align: middle;
+    cursor: pointer;
+
 }
 .escondido {
     display: none;
