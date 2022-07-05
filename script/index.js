@@ -99,7 +99,7 @@ function rendereizarQuizz(resposta) {
 }
 
 function criarQuizz() {
-    location.assign("/quiz.html")
+    location.assign("quiz.html");
 
 }
 
